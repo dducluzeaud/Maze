@@ -5,7 +5,7 @@ from McGyver import McGyver
    coordinates with a dictionnary
 """
 mac = McGyver()
-maze = Maze(mac)
+maze = Maze()
 maze.generate_maze()
 maze.display_maze()
 

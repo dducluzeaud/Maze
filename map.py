@@ -1,14 +1,11 @@
 import random
 
-from McGyver import McGyver
 
 class Maze:
 
-    def __init__(self, McGyver):
+    def __init__(self):
         self.file = "map.txt"
         self.coord = {}
-        self.McGyver = McGyver
-        self.coord[McGyver.x, McGyver.y] = McGyver # McGyver's position
 
     def generate_maze(self):
         """Open and read the file containing the maze. Each char in the file will get
@@ -33,25 +30,8 @@ class Maze:
         random_object = '@'
 
         while object_placed != nb_objet:
-            x_random = random.randint(0, 14)
-            y_random = random.randint(0, 14)
+            x_random = random.randint(1, 13)
+            y_random = random.randint(1, 13)
             if self.coord[(x_random, y_random)] == " ":
                 self.coord[(x_random, y_random)] = random_object
                 object_placed += 1
-            
-
-    def teleport(self, McGyver):
-        """McGyver has the ability to go anywhere in the map"""
-        teleport = False
-
-        while not teleport:
-            line = input()
-            column = input()
-            if self.coord[(line, column)] == " ":
-                # delete the position of McGyver
-                del self.coord[(McGyver.x, McGyver.y)]
-                # McGyver teleport himself in the new position
-                self.coord[line, column] = McGyver
-                teleport = True
-            else:
-                print("McGyver can't teleport here, try again !")
