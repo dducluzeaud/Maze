@@ -24,9 +24,8 @@ class McGyver:
         return self._backpack
 
     @backpack.setter
-    def backpack(self, item):
-        print("You collect {}".format(item))
-        self._backpack += 1
+    def backpack(self, value):
+        self._backpack += value
 
     def teleport(self, maze):
         """McGyver has the ability to go anywhere in the map"""

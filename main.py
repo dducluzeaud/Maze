@@ -24,13 +24,13 @@ maze.display_maze()
 while not maze.game_over(mac):
     mac.teleport(maze)
     if mac.x == pipe.x_random and mac.y == pipe.y_random:
-        mac.backpack = "pipe"
+        mac.backpack = 1
         print("You got the pipe")
-    elif mac.x == gum.x_random and mac.y == gum.y_random:
-        mac.backpack = "gum"
+    elif mac.x == lamp.x_random and mac.y == lamp.y_random:
+        mac.backpack = 1
         print("You got the gum")
     elif mac.x == needle.x_random and mac.y == needle.y_random:
-        mac.backpack = needle
+        mac.backpack = 1
         print("You got the needle")
     maze.display_maze()
     print(mac.backpack)

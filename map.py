@@ -27,8 +27,6 @@ class Maze:
     def random_coordinates(self, item):
 
         item_placed = False
-        item.x_random = random.randrange(1,13)
-        item.y_random = random.randrange(1,13)
 
         while not item_placed:
             if self.coord[(item.x_random, item.y_random)] == " ":
@@ -40,5 +38,8 @@ class Maze:
 
     def game_over(self, mac):
         if self.coord[(mac.x, mac.y)] == self.coord[(1, 13)]:
-            print("You won")
+            if mac.backpack == 3:
+                print("You won")
+            else:
+                print("You loose")
             return True
