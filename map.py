@@ -1,15 +1,13 @@
-import random
-
-
 class Maze:
+
 
     def __init__(self):
         self.file = "map.txt"
         self.coord = {}
 
     def generate_maze(self):
-        """Open and read the file containing the maze. Each char in the file will get
-           coordinates with a dictionnary
+        """Open and read the file containing the maze. Each char in the file
+        will get coordinates with a dictionnary
         """
         with open(self.file, "r") as map_file:
             id_line = 0
@@ -35,3 +33,8 @@ class Maze:
             if self.coord[(x_random, y_random)] == " ":
                 self.coord[(x_random, y_random)] = random_object
                 object_placed += 1
+
+    def game_over(self, mac):
+        if self.coord[(mac.x, mac.y)] == self.coord[(1, 13)]:
+            print("You won")
+            return True
