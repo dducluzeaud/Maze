@@ -25,7 +25,7 @@ class McGyver:
 
     @backpack.setter
     def backpack(self, value):
-        self._backpack += value
+        self._backpack = value
 
     def teleport(self, maze):
         """McGyver has the ability to go anywhere in the map"""
@@ -49,3 +49,29 @@ class McGyver:
                 print("You try to teleport out of the boundaries!")
             except ValueError:
                 print("You must use integer!")
+
+    def move(self, maze):
+
+        action = input()
+        new_x = self._x
+        new_y = self._y
+
+        if action == "top":
+            new_x -= 1
+        elif action == "bot":
+            new_x += 1
+        elif action == "right":
+            new_y += 1
+        else:
+            new_y -= 1
+
+        if re.search(r"(^[(\s)GTEN]$)", maze.coord[(new_x, new_y)]):
+            # delete the position of McGyver
+            maze.coord[(self._x, self._y)] = " "
+            # McGyver move to the direction
+            maze.coord[new_x, new_y] = 'M'
+            self._x, self._y = new_x, new_y
+        else:
+            # revert changes
+            new_x = self._x
+            new_y = self._y
