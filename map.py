@@ -22,7 +22,7 @@ class Maze:
                     id_column += 1
                 id_line += 1
 
-    def display_maze(self):
+    def display_maze(self, window):
 
         # load all images needed to display the maze2
         wall = pygame.image.load(WALL_PICTURE).convert()

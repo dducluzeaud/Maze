@@ -77,7 +77,7 @@ while running:
                 elif mac.x == needle.x_random and mac.y == needle.y_random:
                     mac.backpack += 1
                     print("You got the needle")
-            print(mac.backpack)
-        maze.display_maze(window)
-        pygame.display.flip()
+                print(mac.backpack)
+                maze.display_maze(window)
+                pygame.display.flip()
     running = False
