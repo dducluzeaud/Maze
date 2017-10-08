@@ -7,8 +7,8 @@ class Item:
     def __init__(self, img):
         """An item is placed randomly in the map."""
         self._img = img
-        self._x_random = random.randrange(1, 14)
-        self._y_random = random.randrange(1, 14)
+        self._x_random = random.randrange(1, 13)
+        self._y_random = random.randrange(1, 13)
 
     @property
     def x_random(self):

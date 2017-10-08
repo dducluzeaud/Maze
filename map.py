@@ -1,7 +1,6 @@
 import random
 import pygame
 from constants import *
-from items import Item
 
 class Maze:
 
@@ -9,7 +8,6 @@ class Maze:
     def __init__(self):
         self.file = "map.txt"
         self.coord = {}
-
 
     def generate_maze(self):
         """Open and read the file containing the maze. Each char in the file
@@ -24,9 +22,7 @@ class Maze:
                     id_column += 1
                 id_line += 1
 
-
-
-    def display_maze(self, window):
+    def display_maze(self):
 
         # load all images needed to display the maze2
         wall = pygame.image.load(WALL_PICTURE).convert()
@@ -69,7 +65,11 @@ class Maze:
                 item.y_random = random.randrange(1,13)
 
     def game_over(self, mac):
+<<<<<<< HEAD
         if self.coord[(mac.x, mac.y)] == self.coord[(1, 14)]:
+=======
+        if self.coord[(mac.x, mac.y)] == self.coord[(1, 13)]:
+>>>>>>> parent of cc09188... you can move mcgyver now. Use the arrow keys
             if mac.backpack == 3:
                 print("You won")
             else:
