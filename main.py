@@ -70,12 +70,18 @@ while running:
 
                 if mac.x == tube.x_random and mac.y == tube.y_random:
                     mac.backpack += 1
+                    tube.x_random = 0
+                    tube.y_random = 0
                     print("You got the tube")
                 elif mac.x == ether.x_random and mac.y == ether.y_random:
                     mac.backpack += 1
+                    ether.x_random = 0
+                    ether.y_random = 0
                     print("You got the ether")
                 elif mac.x == needle.x_random and mac.y == needle.y_random:
                     mac.backpack += 1
+                    needle.x_random = 0
+                    needle.y_random = 0
                     print("You got the needle")
                 print(mac.backpack)
                 maze.display_maze(window)

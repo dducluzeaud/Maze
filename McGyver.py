@@ -36,7 +36,7 @@ class McGyver:
             try:
                 line = int(input("Line: "))
                 column = int(input("Column: "))
-                if re.search(r"(^[(\s)GPLN]$)", maze.coord[(line, column)]):
+                if maze.check_coordinates(line, column):
                     # delete the position of McGyver
                     maze.coord[(self._x, self._y)] = " "
                     # McGyver teleport himself in the new position
@@ -64,7 +64,7 @@ class McGyver:
         elif action == "left":
             new_y -= 1
 
-        if re.search(r"(^[(\s)GTEN]$)", maze.coord[(new_x, new_y)]):
+        if maze.check_coordinates(new_x, new_y):
             # delete the position of McGyver
             maze.coord[(self._x, self._y)] = " "
             # McGyver move to the direction
@@ -74,3 +74,5 @@ class McGyver:
             # revert changes
             new_x = self._x
             new_y = self._y
+
+
