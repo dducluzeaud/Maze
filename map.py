@@ -65,11 +65,8 @@ class Maze:
                 item.y_random = random.randrange(1,13)
 
     def game_over(self, mac):
-<<<<<<< HEAD
         if self.coord[(mac.x, mac.y)] == self.coord[(1, 14)]:
-=======
-        if self.coord[(mac.x, mac.y)] == self.coord[(1, 13)]:
->>>>>>> parent of cc09188... you can move mcgyver now. Use the arrow keys
+
             if mac.backpack == 3:
                 print("You won")
             else:
