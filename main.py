@@ -8,37 +8,69 @@ from pygame.locals import *
 
 pygame.init()
 
-# Create McGyver and the maze
-mac = McGyver()
-maze = Maze()
+window = pygame.display.set_mode((600, 600))
 
-window = pygame.display.set_mode((WINDOW, WINDOW))
+# Main loop
+running = True
+while running:
 
-# Read and generate the coordinates of the maze
-maze.generate_maze()
+    #Slow down the loop
+    pygame.time.Clock().tick(30)
 
-# Create and place the object on the map
-pipe = Item("P")
-maze.random_coordinates(pipe)
-lamp = Item("L")
-maze.random_coordinates(lamp)
-needle = Item("N")
-maze.random_coordinates(needle)
+    # Process input (events)
+    for event in pygame.event.get():
+        # check for closing window
+        if event.type == pygame.QUIT:
+            running = False
 
-# Display the maze
-maze.display_maze()
+    # Create McGyver and the maze
+    mac = McGyver()
+    maze = Maze()
 
-# While McGyver have not find the guardian, the game is not over
-while not maze.game_over(mac):
-    mac.teleport(maze)
-    if mac.x == pipe.x_random and mac.y == pipe.y_random:
-        mac.backpack += 1
-        print("You got the pipe")
-    elif mac.x == lamp.x_random and mac.y == lamp.y_random:
-        mac.backpack += 1
-        print("You got the gum")
-    elif mac.x == needle.x_random and mac.y == needle.y_random:
-        mac.backpack += 1
-        print("You got the needle")
-    maze.display_maze()
-    print(mac.backpack)
+    # Create and place the object on the map
+    tube = Item("T")
+    maze.random_coordinates(tube)
+    ether = Item("E")
+    maze.random_coordinates(ether)
+    needle = Item("N")
+    maze.random_coordinates(needle)
+
+    # Read and generate the coordinates of the maze
+    maze.generate_maze()
+
+    # Display the maze
+    maze.display_maze(window)
+
+    pygame.display.flip()
+
+    while not maze.game_over(mac):
+
+        for event in pygame.event.get():
+
+            #Si l'utilisateur quitte, on met la variable qui continue le jeu
+            #ET la variable générale à 0 pour fermer la fenêtre
+            if event.type == QUIT:
+                maze.game_over = True
+
+            elif event.type == KEYDOWN:
+                #Si l'utilisateur presse Echap ici, on revient seulement au menu
+                if event.key == K_ESCAPE:
+                    maze.game_over = True
+
+                #Touches de déplacement de Donkey Kong
+                elif event.key == K_RIGHT:
+                    mac.move(maze, 'right')
+                elif event.key == K_LEFT:
+                    mac.move(maze, 'left')
+                elif event.key == K_UP:
+                    mac.move(maze, 'up')
+                elif event.key == K_DOWN:
+                    mac.move(maze, 'down')
+
+        maze.display_maze(window)
+        pygame.display.flip()
+    running = False
+    print("fuck you")
+
+
+    pygame.display.flip()

@@ -50,15 +50,14 @@ class McGyver:
             except ValueError:
                 print("You must use integer!")
 
-    def move(self, maze):
+    def move(self, maze, action):
 
-        action = input()
         new_x = self._x
         new_y = self._y
 
-        if action == "top":
+        if action == "up":
             new_x -= 1
-        elif action == "bot":
+        elif action == "down":
             new_x += 1
         elif action == "right":
             new_y += 1
