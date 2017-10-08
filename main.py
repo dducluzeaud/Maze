@@ -8,6 +8,7 @@ from pygame.locals import *
 
 pygame.init()
 
+# Set the dimension the window
 window = pygame.display.set_mode((600, 600))
 
 # Main loop
@@ -27,6 +28,9 @@ while running:
     mac = McGyver()
     maze = Maze()
 
+    # Read and generate the coordinates of the maze
+    maze.generate_maze()
+
     # Create and place the object on the map
     tube = Item("T")
     maze.random_coordinates(tube)
@@ -35,29 +39,26 @@ while running:
     needle = Item("N")
     maze.random_coordinates(needle)
 
-    # Read and generate the coordinates of the maze
-    maze.generate_maze()
-
     # Display the maze
     maze.display_maze(window)
 
+    # Refresh the screen
     pygame.display.flip()
 
+    # While McGyver have not find the guardian, the game is not over
     while not maze.game_over(mac):
 
         for event in pygame.event.get():
 
-            #Si l'utilisateur quitte, on met la variable qui continue le jeu
-            #ET la variable générale à 0 pour fermer la fenêtre
             if event.type == QUIT:
                 maze.game_over = True
 
             elif event.type == KEYDOWN:
-                #Si l'utilisateur presse Echap ici, on revient seulement au menu
+                # Escape to quit
                 if event.key == K_ESCAPE:
                     maze.game_over = True
 
-                #Touches de déplacement de Donkey Kong
+                #Arrow keys to move McGyver
                 elif event.key == K_RIGHT:
                     mac.move(maze, 'right')
                 elif event.key == K_LEFT:
@@ -67,10 +68,17 @@ while running:
                 elif event.key == K_DOWN:
                     mac.move(maze, 'down')
 
+                if mac.x == tube.x_random and mac.y == tube.y_random:
+                    mac.backpack += 1
+                    print("You got the tube")
+                elif mac.x == ether.x_random and mac.y == ether.y_random:
+                    mac.backpack += 1
+                    print("You got the ether")
+                elif mac.x == needle.x_random and mac.y == needle.y_random:
+                    mac.backpack += 1
+                    print("You got the needle")
+            print(mac.backpack)
         maze.display_maze(window)
         pygame.display.flip()
     running = False
-    print("fuck you")
 
-
-    pygame.display.flip()

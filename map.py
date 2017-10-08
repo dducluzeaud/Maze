@@ -65,11 +65,11 @@ class Maze:
                 self.coord[(item.x_random, item.y_random)] = item.img
                 item_placed = True
             else:
-                item.x_random = random.randrange(2,14)
-                item.y_random = random.randrange(2,14)
+                item.x_random = random.randrange(1,13)
+                item.y_random = random.randrange(1,13)
 
     def game_over(self, mac):
-        if self.coord[(mac.x, mac.y)] == self.coord[(2, 14)]:
+        if self.coord[(mac.x, mac.y)] == self.coord[(1, 14)]:
             if mac.backpack == 3:
                 print("You won")
             else:
