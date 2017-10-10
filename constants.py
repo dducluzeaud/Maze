@@ -1,12 +1,12 @@
 # Constant with the path of the image
-NEEDLE = "img/needle.gif"
-WALL_PICTURE = "img/wall.gif"
-BACKGROUND_PICTURE = "img/background.gif"
-MCGYVER = "img/mcgyver.gif"
-GUARDIAN = "img/guardian.gif"
-TUBE = "img/tube.gif"
-ETHER = "img/ether.gif"
-NEEDLE = "img/needle.gif"
+NEEDLE = "img/needle.png"
+WALL_PICTURE = "img/wall.png"
+BACKGROUND_PICTURE = "img/background.png"
+MCGYVER = "img/mcgyver.png"
+GUARDIAN = "img/guardian.png"
+TUBE = "img/tube.png"
+ETHER = "img/ether.png"
+NEEDLE = "img/needle.png"
 
 # Size in pixel
 WINDOW = 600

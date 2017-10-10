@@ -7,9 +7,18 @@ import pygame
 from pygame.locals import *
 
 pygame.init()
+pygame.font.init()
 
 # Set the dimension the window
-window = pygame.display.set_mode((600, 600))
+window = pygame.display.set_mode((600, 640))
+
+white = [255, 255, 255]
+window.fill(white)
+pygame.display.set_caption("Maze")
+pygame.display.flip()
+
+# initialize font; must be called after 'pygame.init()' to avoid 'Font not Initialized' error
+myfont = pygame.font.SysFont("monospace", 15)
 
 # Main loop
 running = True
@@ -68,11 +77,13 @@ while running:
                 elif event.key == K_DOWN:
                     mac.move(maze, 'down')
 
+                print(mac.x, mac.y)
                 if mac.x == tube.x_random and mac.y == tube.y_random:
                     mac.backpack += 1
                     tube.x_random = 0
                     tube.y_random = 0
-                    print("You got the tube")
+                    label = myfont.render("Some text!", 1, (255,255,0))
+                    window.blit(label, (600, 640))
                 elif mac.x == ether.x_random and mac.y == ether.y_random:
                     mac.backpack += 1
                     ether.x_random = 0

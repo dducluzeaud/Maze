@@ -28,29 +28,29 @@ class Maze:
         # load all images needed to display the maze2
         wall = pygame.image.load(WALL_PICTURE).convert()
         background = pygame.image.load(BACKGROUND_PICTURE).convert()
-        mcgyver = pygame.image.load(MCGYVER).convert()
-        guardian = pygame.image.load(GUARDIAN).convert()
-        tube = pygame.image.load(TUBE).convert()
-        ether = pygame.image.load(ETHER).convert()
-        needle = pygame.image.load(NEEDLE).convert()
+        mcgyver = pygame.image.load(MCGYVER).convert_alpha()
+        guardian = pygame.image.load(GUARDIAN).convert_alpha()
+        tube = pygame.image.load(TUBE).convert_alpha()
+        ether = pygame.image.load(ETHER).convert_alpha()
+        needle = pygame.image.load(NEEDLE).convert_alpha()
 
         for coord, value in self.coord.items():
             x = coord[1] * SIZE_SPRITE
             y = coord[0] * SIZE_SPRITE
             if value == '#':
                 window.blit(wall, (x, y))
-            elif value == ' ':
+            else:
                 window.blit(background, (x, y))
-            elif value == 'G':
-                window.blit(guardian, (x, y))
-            elif value == 'M':
-                window.blit(mcgyver, (x, y))
-            elif value =='N':
-                window.blit(needle, (x,y))
-            elif value == 'T':
-                window.blit(tube, (x, y))
-            elif value == 'E':
-                window.blit(ether, (x, y))
+                if value == 'G':
+                    window.blit(guardian, (x, y))
+                elif value == 'M':
+                    window.blit(mcgyver, (x, y))
+                elif value =='N':
+                    window.blit(needle, (x,y))
+                elif value == 'T':
+                    window.blit(tube, (x, y))
+                elif value == 'E':
+                    window.blit(ether, (x, y))
 
 
     def random_coordinates(self, item):
