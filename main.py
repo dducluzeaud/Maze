@@ -77,7 +77,6 @@ while running:
                 elif event.key == K_DOWN:
                     mac.move(maze, 'down')
 
-                print(mac.x, mac.y)
                 if mac.x == tube.x_random and mac.y == tube.y_random:
                     mac.backpack += 1
                     tube.x_random = 0
@@ -96,5 +95,7 @@ while running:
                     print("You got the needle")
                 print(mac.backpack)
                 maze.display_maze(window)
+                label = myfont.render("Some text!", 1, (255,255,0))
+                window.blit(label, (600, 640))
                 pygame.display.flip()
     running = False
