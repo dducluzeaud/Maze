@@ -1,4 +1,3 @@
-import re
 class McGyver:
     """McGyver have to collect 3 items to get out of the maze, if he don't he
     die."""
@@ -62,13 +61,14 @@ class McGyver:
         elif action == "left":
             new_y -= 1
 
-        if not maze.check_coordinates(new_x, new_y):
+        if maze.coord[(new_x, new_y)] == "#":
             # revert changes
             new_x = self._x
             new_y = self._y
         else:
+            items = ['T', 'E', 'N']
             # If McGyver move on an item, he pick it up
-            if re.search(r"(^[TEN]$)", maze.coord[(new_x, new_y)]):
+            if any(x in maze.coord[(new_x, new_y)] for x in items):
                 self.pick_up_items(maze)
 
             # delete the position of McGyver

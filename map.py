@@ -1,6 +1,5 @@
 import random
 import pygame
-import re
 from constants import *
 from items import Item
 
@@ -73,13 +72,6 @@ class Maze:
             else:
                 item.x_random = random.randrange(1,13)
                 item.y_random = random.randrange(1,13)
-
-    def check_coordinates(self, x, y):
-        """Check if the case contain space or an object or the guardian."""
-        if re.search(r"(^[(\s)GTEN]$)", self.coord[(x, y)]):
-            return True
-        else:
-            return False
 
     def game_over(self, mac):
 
