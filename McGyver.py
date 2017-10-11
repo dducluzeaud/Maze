@@ -1,6 +1,4 @@
 import re
-
-
 class McGyver:
     """McGyver have to collect 3 items to get out of the maze, if he don't he
     die."""
@@ -51,7 +49,7 @@ class McGyver:
                 print("You must use integer!")
 
     def move(self, maze, action):
-
+        """McGyver can move forward, backward, and sideward."""
         new_x = self._x
         new_y = self._y
 
@@ -64,15 +62,22 @@ class McGyver:
         elif action == "left":
             new_y -= 1
 
-        if maze.check_coordinates(new_x, new_y):
+        if not maze.check_coordinates(new_x, new_y):
+            # revert changes
+            new_x = self._x
+            new_y = self._y
+        else:
+            # If McGyver move on an item, he pick it up
+            if re.search(r"(^[TEN]$)", maze.coord[(new_x, new_y)]):
+                self.pick_up_items(maze)
+
             # delete the position of McGyver
             maze.coord[(self._x, self._y)] = " "
             # McGyver move to the direction
             maze.coord[new_x, new_y] = 'M'
             self._x, self._y = new_x, new_y
-        else:
-            # revert changes
-            new_x = self._x
-            new_y = self._y
 
+        print(self._backpack)
 
+    def pick_up_items(self, maze):
+        self._backpack += 1

@@ -2,6 +2,7 @@ import random
 import pygame
 import re
 from constants import *
+from items import Item
 
 class Maze:
 
@@ -10,7 +11,6 @@ class Maze:
         self.file = "map.txt"
         self.coord = {}
 
-    def generate_maze(self):
         """Open and read the file containing the maze. Each char in the file
         will get the coordinates in a dictionnary
         """
@@ -22,6 +22,15 @@ class Maze:
                     self.coord[(id_line, id_column)] = char
                     id_column += 1
                 id_line += 1
+
+        # Create and place the object on the map
+        tube = Item("T")
+        self.random_coordinates(tube)
+        ether = Item("E")
+        self.random_coordinates(ether)
+        needle = Item("N")
+        self.random_coordinates(needle)
+
 
     def display_maze(self, window):
 
@@ -81,5 +90,3 @@ class Maze:
             else:
                 print("You loose")
             return True
-
-

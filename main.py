@@ -37,17 +37,6 @@ while running:
     mac = McGyver()
     maze = Maze()
 
-    # Read and generate the coordinates of the maze
-    maze.generate_maze()
-
-    # Create and place the object on the map
-    tube = Item("T")
-    maze.random_coordinates(tube)
-    ether = Item("E")
-    maze.random_coordinates(ether)
-    needle = Item("N")
-    maze.random_coordinates(needle)
-
     # Display the maze
     maze.display_maze(window)
 
@@ -56,7 +45,7 @@ while running:
 
     # While McGyver have not find the guardian, the game is not over
     while not maze.game_over(mac):
-
+        label = myfont.render("Some text!", 1, (255,255,0))
         for event in pygame.event.get():
 
             if event.type == QUIT:
@@ -67,7 +56,7 @@ while running:
                 if event.key == K_ESCAPE:
                     maze.game_over = True
 
-                #Arrow keys to move McGyver
+                # Arrow keys to move McGyver
                 elif event.key == K_RIGHT:
                     mac.move(maze, 'right')
                 elif event.key == K_LEFT:
@@ -77,25 +66,8 @@ while running:
                 elif event.key == K_DOWN:
                     mac.move(maze, 'down')
 
-                if mac.x == tube.x_random and mac.y == tube.y_random:
-                    mac.backpack += 1
-                    tube.x_random = 0
-                    tube.y_random = 0
-                    label = myfont.render("Some text!", 1, (255,255,0))
-                    window.blit(label, (600, 640))
-                elif mac.x == ether.x_random and mac.y == ether.y_random:
-                    mac.backpack += 1
-                    ether.x_random = 0
-                    ether.y_random = 0
-                    print("You got the ether")
-                elif mac.x == needle.x_random and mac.y == needle.y_random:
-                    mac.backpack += 1
-                    needle.x_random = 0
-                    needle.y_random = 0
-                    print("You got the needle")
-                print(mac.backpack)
                 maze.display_maze(window)
                 label = myfont.render("Some text!", 1, (255,255,0))
-                window.blit(label, (600, 640))
+                window.blit(label, (610, 620))
                 pygame.display.flip()
     running = False
