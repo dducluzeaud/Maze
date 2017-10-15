@@ -9,30 +9,64 @@ from pygame.locals import *
 pygame.init()
 pygame.font.init()
 
-window_width = 600
-window_height = 600
+# initialize font
+font = pygame.font.SysFont("monospace", 40)
+smallfont = pygame.font.SysFont("monospace", 25)
 
 # Set the dimension the window
-window = pygame.display.set_mode((window_width, window_height))
-
-white = [255, 255, 255]
-window.fill(white)
+window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Maze")
 pygame.display.flip()
 
-# initialize font
-font = pygame.font.SysFont("monospace", 40)
 
 
-def text_objects(text, color):
-    textSurface = font.render(text, True, color)
+
+def text_objects(text, color, size):
+    if size == "small":
+        textSurface = smallfont.render(text, True, color)
+    elif size == "medium":
+        textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
 
 
-def message_to_screen(msg, color, y_displace=0):
-    textSurf, textRect = text_objects(msg, color)
+def message_to_screen(msg, color, y_displace=0, size = "medium"):
+    textSurf, textRect = text_objects(msg, color, size)
     textRect.center = (WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2) + y_displace
     window.blit(textSurf, textRect)
+
+def show_items_collected(mac):
+
+    show = True
+    tube = pygame.image.load(TUBE).convert_alpha()
+    ether = pygame.image.load(ETHER).convert_alpha()
+    needle = pygame.image.load(NEEDLE).convert_alpha()
+    line = 320
+
+    while show:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                maze.game_over = True
+
+            elif event.type == KEYDOWN:
+                # Escape to quit
+                if event.key == K_TAB:
+                    show = False
+
+        window.fill(WHITE)
+        message_to_screen("You picked up:", BLACK)
+
+        for item in mac.backpack:
+            if item == 'T':
+                window.blit(tube, (280, line))
+            elif item == 'N':
+                window.blit(needle, (320, line))
+            elif item == 'E':
+                window.blit(ether, (240, line))
+        if len(mac.backpack) == 3:
+            message_to_screen("You can put the guardian to sleep now",GREEN, 80, size = "small")
+        else:
+            message_to_screen("You have to collect more items", RED, 80, size = "small")
+        pygame.display.flip()
 
 
 # Main loop
@@ -68,7 +102,7 @@ def main_loop():
             for event in pygame.event.get():
 
                 if event.type == QUIT:
-                    maze.game_over = True
+                    game_exit = True
 
                 elif event.type == KEYDOWN:
                     # Escape to quit
@@ -84,6 +118,9 @@ def main_loop():
                         mac.move(maze, 'up')
                     elif event.key == K_DOWN:
                         mac.move(maze, 'down')
+                    # Show the items colectted
+                    elif event.key == K_TAB:
+                        show_items_collected(mac)
 
                     maze.display_maze(window)
                     pygame.display.flip()

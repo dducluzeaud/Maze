@@ -75,7 +75,5 @@ class McGyver:
             maze.coord[new_x, new_y] = 'M'
             self._x, self._y = new_x, new_y
 
-        print(self._backpack)
-        print(len(self._backpack))
     def pick_up_items(self, maze, item):
         self._backpack.append(item)

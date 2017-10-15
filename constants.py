@@ -18,3 +18,5 @@ SIZE_SPRITE = 40
 # Color
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+GREEN = (0, 128, 0)
