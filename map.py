@@ -60,7 +60,6 @@ class Maze:
                 elif value == 'E':
                     window.blit(ether, (x, y))
 
-
     def random_coordinates(self, item):
 
         item_placed = False
@@ -76,9 +75,18 @@ class Maze:
     def game_over(self, mac):
 
         if self.coord[(mac.x, mac.y)] == self.coord[(1, 14)]:
-
-            if mac.backpack == 3:
-                print("You won")
-            else:
-                print("You loose")
             return True
+        else:
+            return False
+
+    def winner(self, mac):
+
+        winner = ""
+
+        if self.game_over(mac) == True:
+            if len(mac.backpack) == 3:
+                winner = "McGyver"
+            else:
+                winner = "Murdoc"
+
+        return winner

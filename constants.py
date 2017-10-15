@@ -7,8 +7,14 @@ GUARDIAN = "img/guardian.png"
 TUBE = "img/tube.png"
 ETHER = "img/ether.png"
 NEEDLE = "img/needle.png"
+MCGYVER_WIN = "img/mcgyver_win.png"
+MURDOC_WIN = "img/murdoc_win.png"
 
 # Size in pixel
-WINDOW = 600
+WINDOW_WIDTH = 600
+WINDOW_HEIGHT = 600
 SIZE_SPRITE = 40
 
+# Color
+RED = (255, 0, 0)
+WHITE = (255, 255, 255)

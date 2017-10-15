@@ -3,10 +3,10 @@ class McGyver:
     die."""
 
     def __init__(self):
-        """At the start of the game McGyver is at the position 1, 1. He have a backpack to be able to count the items he collet"""
+        """At the start of the game McGyver is at the position 1, 1. He have a backpack to be able to count the items he collect."""
         self._x = 1
         self._y = 1
-        self._backpack = 0
+        self._backpack = []
 
     @property
     def x(self):
@@ -20,9 +20,6 @@ class McGyver:
     def backpack(self):
         return self._backpack
 
-    @backpack.setter
-    def backpack(self, value):
-        self._backpack = value
 
     def teleport(self, maze):
         """McGyver has the ability to go anywhere in the map"""
@@ -68,8 +65,9 @@ class McGyver:
         else:
             items = ['T', 'E', 'N']
             # If McGyver move on an item, he pick it up
-            if any(x in maze.coord[(new_x, new_y)] for x in items):
-                self.pick_up_items(maze)
+            for item in items:
+                if item in maze.coord[(new_x, new_y)]:
+                    self.pick_up_items(maze, item)
 
             # delete the position of McGyver
             maze.coord[(self._x, self._y)] = " "
@@ -78,6 +76,6 @@ class McGyver:
             self._x, self._y = new_x, new_y
 
         print(self._backpack)
-
-    def pick_up_items(self, maze):
-        self._backpack += 1
+        print(len(self._backpack))
+    def pick_up_items(self, maze, item):
+        self._backpack.append(item)
