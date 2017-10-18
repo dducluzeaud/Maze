@@ -4,11 +4,20 @@ import random
 class Item:
     """Items are mandatory to win the game. McGyver have to collect them."""
 
-    def __init__(self, img):
+    def __init__(self, img, maze):
         """An item is placed randomly in the map."""
         self._img = img
         self._x_random = random.randrange(1, 13)
         self._y_random = random.randrange(1, 13)
+
+        item_placed = False
+
+        while not item_placed:
+            self.x_random = random.randrange(1,13)
+            self.y_random = random.randrange(1,13)
+            if maze.coord[(self._x_random, self._y_random)] == " ":
+                maze.coord[(self._x_random, self._y_random)] = self._img
+                item_placed = True
 
     @property
     def x_random(self):

@@ -1,4 +1,4 @@
-# Constant with the path of the image
+# Path of the image
 NEEDLE = "img/needle.png"
 WALL_PICTURE = "img/wall.png"
 BACKGROUND_PICTURE = "img/background.png"
