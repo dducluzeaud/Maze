@@ -82,71 +82,92 @@ class Main():
 
     def screen_game_over(self):
 
-        winner = self.maze.winner(self.mac)
+        display_screen = True
 
-        mcgyver_win = pygame.image.load(MCGYVER_WIN).convert()
-        murdoc_win = pygame.image.load(MURDOC_WIN).convert()
+        while display_screen:
 
-        if winner == "McGyver":
-            self.window.blit(mcgyver_win, (0, 0))
-            self.message_to_screen("You win", WHITE, -75)
-            pygame.display.update()
-        elif winner == "Murdoc":
-            self.window.blit(murdoc_win, (0, 0))
-            self.message_to_screen("You loose", WHITE, -75)
-            pygame.display.update()
-        self.message_to_screen("Press P to play agin or Q to quit", WHITE)
-        pygame.display.flip()
+            winner = self.maze.winner(self.mac)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.game_over = False
-                self.game_exit = True
+            mcgyver_win = pygame.image.load(MCGYVER_WIN).convert()
+            murdoc_win = pygame.image.load(MURDOC_WIN).convert()
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == K_p:
-                    self.game_over = False
-                    self.game_exit = False
-                    # Reset the object
-                    self.maze.__init__()
-                    self.mac.__init__()
+            if winner == "McGyver":
+                self.window.blit(mcgyver_win, (0, 0))
+                self.message_to_screen("You win", WHITE, -75)
+                pygame.display.update()
+            elif winner == "Murdoc":
+                self.window.blit(murdoc_win, (0, 0))
+                self.message_to_screen("You loose", WHITE, -75)
+                pygame.display.update()
+            self.message_to_screen("Press P to play agin or Q to quit", WHITE)
+            pygame.display.flip()
 
-                elif event.key == K_q:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
                     self.game_over = False
                     self.game_exit = True
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == K_p:
+                        self.game_over = False
+                        self.game_exit = False
+                        # Reset the object
+                        self.maze.__init__()
+                        self.mac.__init__()
+                        display_screen = False
+                    elif event.key == K_q:
+                        self.game_over = False
+                        self.game_exit = True
+                        display_screen = False
 
     def event_in_pygame(self):
-        for event in pygame.event.get():
 
-            if event.type == KEYDOWN:
-                # Arrow keys to move McGyver
-                if event.key == K_RIGHT:
-                    self.mac.move(self.maze, 'right')
-                elif event.key == K_LEFT:
-                    self.mac.move(self.maze, 'left')
-                elif event.key == K_UP:
-                    self.mac.move(self.maze, 'up')
-                elif event.key == K_DOWN:
-                    self.mac.move(self.maze, 'down')
-                # Show the items colectted
-                elif event.key == K_TAB:
-                    self.show_items_collected()
-                elif event.key == K_ESCAPE:
-                    self.game_over = False
+        move = True
+
+        while move:
+            for event in pygame.event.get():
+
+                # check for closing window
+                if event.type == pygame.QUIT:
                     self.game_exit = True
-                
+                    self.game_over = False
+                    move = False
+                elif event.type == KEYDOWN:
+                # Escape to quit
+                    if event.key == K_ESCAPE:
+                        self.game_exit = True
+                        self.game_over = False
+                        move = False
 
-                self.maze.display_maze(self.window)
-                pygame.display.flip()
-                self.game_over = self.maze.game_over(self.mac)
+                    # Arrow keys to move McGyver
+                    elif event.key == K_RIGHT:
+                        self.mac.move(self.maze, 'right')
+                    elif event.key == K_LEFT:
+                        self.mac.move(self.maze, 'left')
+                    elif event.key == K_UP:
+                        self.mac.move(self.maze, 'up')
+                    elif event.key == K_DOWN:
+                        self.mac.move(self.maze, 'down')
+                    # Show the items colectted
+                    elif event.key == K_TAB:
+                        self.show_items_collected()
+                    elif event.key == K_ESCAPE:
+                        self.game_over = False
+                        self.game_exit = True
+                    
 
+                    self.maze.display_maze(self.window)
+                    pygame.display.flip()
+                    self.game_over = self.maze.game_over(self.mac)
+            
+            if self.game_over == True:
+                move = False
 
     # Main loop
     def main_loop(self):
 
         pygame.display.flip()
                         
-
         while not self.game_exit:
 
             # Slow down the loop
@@ -159,24 +180,12 @@ class Main():
             pygame.display.flip()
 
             # While McGyver have not find the guardian, he can move around the map
-            while not self.game_over:
+            if not self.game_over:
 
                 self.event_in_pygame()
 
-                        # Process input (events)
-                for event in pygame.event.get():
-                    # check for closing window
-                    if event.type == pygame.QUIT:
-                        self.game_exit = True
-
-                    elif event.type == KEYDOWN:
-                    # Escape to quit
-                        if event.key == K_ESCAPE:
-                            self.game_exit = True
-                            print(self.game_over, self.game_exit)
-
             # Show a screen where you can quit or play again
-            while self.game_over:
+            else:
 
                 self.screen_game_over()
 
