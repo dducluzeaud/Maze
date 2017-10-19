@@ -39,7 +39,7 @@ class Maze:
         for char, item in self.items.items():
             item = self.path_to_img_alpha(item)
             self.items[char] = item
-            
+
     # convert the constant into image without transparency
     def path_to_img(self, img):
         return pygame.image.load(img).convert()
@@ -77,7 +77,7 @@ class Maze:
         winner = ""
 
         if self.game_over() == True:
-            if len(self.mac.backpack) == 3:
+            if len(self.mac.backpack) == len(self.items):
                 winner = "McGyver"
             else:
                 winner = "Murdoc"

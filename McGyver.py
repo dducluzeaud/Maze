@@ -54,14 +54,3 @@ class McGyver:
     def pick_up_items(self, maze, item):
         self._backpack.append(item)
 
-    def winner(self, mac):
-
-        winner = ""
-
-        if self.game_over(mac) == True:
-            if len(mac.backpack) == 3:
-                winner = "McGyver"
-            else:
-                winner = "Murdoc"
-
-        return winner

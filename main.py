@@ -48,8 +48,8 @@ class Main():
         tube = pygame.image.load(TUBE).convert_alpha()
         ether = pygame.image.load(ETHER).convert_alpha()
         needle = pygame.image.load(NEEDLE).convert_alpha()
-        line = 320
-        nb_items_left = 3 - len(self.maze.mac.backpack)
+        
+        nb_items_left = len(self.maze.items) - len(self.maze.mac.backpack)
 
         while show:
             for event in pygame.event.get():
@@ -63,15 +63,18 @@ class Main():
 
             self.window.fill(WHITE)
             self.message_to_screen("You picked up:", BLACK)
+            
+            line = 320
+            position = 240
+            for char, img in self.maze.items.items():
+                for item in self.maze.mac.backpack:
+                    if item == char:
+                        self.window.blit(img, (position, line))
+                        print(char, item, position)
+                        position += 40
+                
 
-            for item in self.maze.mac.backpack:
-                if item == 'T':
-                    self.window.blit(tube, (280, line))
-                elif item == 'N':
-                    self.window.blit(needle, (320, line))
-                elif item == 'E':
-                    self.window.blit(ether, (240, line))
-            if len(self.maze.mac.backpack) == 3:
+            if len(self.maze.mac.backpack) == len(self.maze.items):
                 self.message_to_screen("You can put the guardian to sleep now",GREEN, 80, size = "small")
             else:
                 self.message_to_screen("You still have {} items to collect".format(nb_items_left), RED, 80, size = "small")
