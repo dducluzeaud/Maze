@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 from items import Item
+from McGyver import McGyver
 
 class Maze:
 
@@ -20,6 +21,8 @@ class Maze:
                     self.coord[(id_line, id_column)] = char
                     id_column += 1
                 id_line += 1
+
+        self.mac = McGyver()
 
         # load all images needed to display the maze
         self.wall = self.path_to_img(WALL_PICTURE)
@@ -62,19 +65,19 @@ class Maze:
                 if value == char:
                     window.blit(img, (x, y))
 
-    def game_over(self, mac):
+    def game_over(self):
     
-        if self.coord[(mac.x, mac.y)] == self.coord[(1, 14)]:
+        if self.coord[(self.mac.x, self.mac.y)] == self.coord[(1, 14)]:
             return True
         else:
             return False
 
-    def winner(self, mac):
+    def winner(self):
 
         winner = ""
 
-        if self.game_over(mac) == True:
-            if len(mac.backpack) == 3:
+        if self.game_over() == True:
+            if len(self.mac.backpack) == 3:
                 winner = "McGyver"
             else:
                 winner = "Murdoc"

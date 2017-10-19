@@ -21,29 +21,6 @@ class McGyver:
         return self._backpack
 
 
-    def teleport(self, maze):
-        """McGyver has the ability to go anywhere in the map"""
-
-        teleport = False
-
-        while not teleport:
-            try:
-                line = int(input("Line: "))
-                column = int(input("Column: "))
-                if maze.check_coordinates(line, column):
-                    # delete the position of McGyver
-                    maze.coord[(self._x, self._y)] = " "
-                    # McGyver teleport himself in the new position
-                    maze.coord[line, column] = 'M'
-                    self._x, self._y = line, column
-                    teleport = True
-                else:
-                    print("McGyver can't teleport here, try again !")
-            except KeyError:
-                print("You try to teleport out of the boundaries!")
-            except ValueError:
-                print("You must use integer!")
-
     def move(self, maze, action):
         """McGyver can move forward, backward, and sideward."""
         new_x = self._x
@@ -63,9 +40,8 @@ class McGyver:
             new_x = self._x
             new_y = self._y
         else:
-            items = ['T', 'E', 'N']
             # If McGyver move on an item, he pick it up
-            for item in items:
+            for item in maze.items.keys():
                 if item in maze.coord[(new_x, new_y)]:
                     self.pick_up_items(maze, item)
 
@@ -77,3 +53,15 @@ class McGyver:
 
     def pick_up_items(self, maze, item):
         self._backpack.append(item)
+
+    def winner(self, mac):
+
+        winner = ""
+
+        if self.game_over(mac) == True:
+            if len(mac.backpack) == 3:
+                winner = "McGyver"
+            else:
+                winner = "Murdoc"
+
+        return winner
