@@ -3,8 +3,8 @@ from constants import *
 from items import Item
 from McGyver import McGyver
 
-class Maze:
 
+class Maze:
 
     def __init__(self):
         self.file = "map.txt"
@@ -31,7 +31,7 @@ class Maze:
         self.guardian = self.path_to_img_alpha(GUARDIAN)
 
         self.items = {'E': ETHER, 'N': NEEDLE, 'T': TUBE}
-        
+
         # Create the object on the maze
         for obj in self.items.keys():
             Item(obj, self)
@@ -43,7 +43,7 @@ class Maze:
     # convert the constant into image without transparency
     def path_to_img(self, img):
         return pygame.image.load(img).convert()
-    
+
     # convert the constant into image with transparency
     def path_to_img_alpha(self, img):
         return pygame.image.load(img).convert_alpha()
@@ -66,7 +66,7 @@ class Maze:
                     window.blit(img, (x, y))
 
     def game_over(self):
-    
+
         if self.coord[(self.mac.x, self.mac.y)] == self.coord[(1, 14)]:
             return True
         else:

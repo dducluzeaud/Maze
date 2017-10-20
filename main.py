@@ -28,7 +28,7 @@ class Main():
 
         # Create and generatethe Maze
         self.maze = Maze()
-
+    
     def text_objects(self, text, color, size):
         if size == "small":
             textSurface = self.smallfont.render(text, True, color)
@@ -45,10 +45,6 @@ class Main():
     def show_items_collected(self):
 
         show = True
-        tube = pygame.image.load(TUBE).convert_alpha()
-        ether = pygame.image.load(ETHER).convert_alpha()
-        needle = pygame.image.load(NEEDLE).convert_alpha()
-        
         nb_items_left = len(self.maze.items) - len(self.maze.mac.backpack)
 
         while show:
@@ -72,8 +68,7 @@ class Main():
                         self.window.blit(img, (position, line))
                         print(char, item, position)
                         position += 40
-                
-
+         
             if len(self.maze.mac.backpack) == len(self.maze.items):
                 self.message_to_screen("You can put the guardian to sleep now",GREEN, 80, size = "small")
             else:

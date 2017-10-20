@@ -45,12 +45,11 @@ class McGyver:
                 if item in maze.coord[(new_x, new_y)]:
                     self.pick_up_items(maze, item)
 
-            # delete the position of McGyver
-            maze.coord[(self._x, self._y)] = " "
-            # McGyver move to the direction
-            maze.coord[new_x, new_y] = 'M'
-            self._x, self._y = new_x, new_y
+        # delete the position of McGyver
+        maze.coord[(self._x, self._y)] = " "
+        # McGyver move to the direction
+        maze.coord[new_x, new_y] = 'M'
+        self._x, self._y = new_x, new_y
 
     def pick_up_items(self, maze, item):
         self._backpack.append(item)
-
