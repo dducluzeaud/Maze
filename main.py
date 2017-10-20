@@ -1,5 +1,4 @@
 from maze import Maze
-from items import Item
 from constants import *
 
 import pygame
@@ -15,8 +14,8 @@ class Main():
         pygame.font.init()
 
         # initialize font
-        self.font = pygame.font.SysFont("monospace", 40)
-        self.smallfont = pygame.font.SysFont("monospace", 25)
+        self.font = pygame.font.SysFont(None, 40)
+        self.smallfont = pygame.font.SysFont(None, 25)
 
         # Set the dimension the window
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -35,7 +34,6 @@ class Main():
         elif size == "medium":
             textSurface = self.font.render(text, True, color)
         return textSurface, textSurface.get_rect()
-
 
     def message_to_screen(self, msg, color, y_displace=0, size = "medium"):
         textSurf, textRect = self.text_objects(msg, color, size)
@@ -66,8 +64,7 @@ class Main():
                 for item in self.maze.mac.backpack:
                     if item == char:
                         self.window.blit(img, (position, line))
-                        print(char, item, position)
-                        position += 40
+                        position += SIZE_SPRITE
          
             if len(self.maze.mac.backpack) == len(self.maze.items):
                 self.message_to_screen("You can put the guardian to sleep now",GREEN, 80, size = "small")
@@ -128,7 +125,7 @@ class Main():
                     self.game_over = False
                     move = False
                 elif event.type == KEYDOWN:
-                # Escape to quit
+                    # Escape to quit
                     if event.key == K_ESCAPE:
                         self.game_exit = True
                         self.game_over = False
@@ -149,13 +146,12 @@ class Main():
                     elif event.key == K_ESCAPE:
                         self.game_over = False
                         self.game_exit = True
-                    
 
                     self.maze.display_maze(self.window)
                     pygame.display.flip()
                     self.game_over = self.maze.game_over()
             
-            if self.game_over == True:
+            if self.game_over:
                 move = False
 
     # Main loop
